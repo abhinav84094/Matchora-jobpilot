@@ -21,10 +21,6 @@ import {
 import { useAuth } from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { Navigate, Link } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -219,63 +215,7 @@ export default function Login() {
                   <ArrowRight size={13} className="text-neutral-300 -mt-4 shrink-0" />
                 )}
               </div>
-
-            </div>            {/* Google Login Card */}
-
-            <div className="mt-10 rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm">
-
-              <div className="text-center">
-
-                <div className="w-16 h-16 rounded-2xl bg-violet-600 mx-auto flex items-center justify-center">
-
-                  <Sparkles className="text-white" size={28} />
-
-                </div>
-
-                <h3 className="text-2xl font-bold mt-5">
-                  Welcome to Matchora
-                </h3>
-
-                <p className="text-neutral-500 mt-2">
-                  Continue with your Google account
-                </p>
-
-              </div>
-
-              <div className="mt-8 flex justify-center">
-
-                <GoogleLogin
-                  onSuccess={async (credentialResponse) => {
-
-                    const res = await fetch(
-                      `${API_URL}/api/auth/google`,
-                      {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        credentials: "include",
-                        body: JSON.stringify({
-                          token: credentialResponse.credential,
-                        }),
-                      }
-                    );
-
-                    if (res.ok) {
-                      window.location.href = "/dashboard";
-                    }
-                  }}
-                  onError={() => console.log("Google Login Failed")}
-                />
-
-              </div>
-
-              <p className="text-center text-xs text-neutral-400 mt-6">
-                Secure Google Sign-In
-              </p>
-
-            </div>
-
+            ))}
           </div>
         </div>
 
@@ -290,11 +230,8 @@ export default function Login() {
                 <p className="text-sm font-medium text-neutral-900 leading-tight">{b.title}</p>
                 <p className="text-xs text-neutral-400 mt-0.5 leading-snug">{b.desc}</p>
               </div>
-
             </div>
-
-          </div>
-
+          ))}
         </div>
 
         <p className="text-xs text-neutral-400 text-center mt-10 leading-relaxed">
